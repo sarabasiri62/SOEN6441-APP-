@@ -82,23 +82,32 @@ public class Math {
 		return 0;
 	}
 	public static double angle(){
-		double a=0;
-		Math m=new Math();
+		double x; 
 		double PI=GetPI();
-		double rad = 0;
-		System.out.println("Starting...");
-		
-		while(a<=180){
-			rad = a * 1. / 180. * PI;
-			if (rad-m.sin(a)==PI/2){
-				return a;
-				
-			}
-			else a+=0.00001; 
-		}
-		System.out.println("not found");
-		return 0;
-		
+	    x=Double.MIN_VALUE;
+	    //x=1; 
+	    x=PI/2+sin(x);
+	   // System.out.println(x);
+	   double delta=(PI/2+sin(x))-x;
+	    System.out.println("delta= "+delta);
+	    
+	    double temp=0;
+	    double px=x;
+	    System.out.println("px= "+x);
+	    x+=1/pow(10,3);
+	    System.out.println("x= "+x);
+	    temp=(PI/2+sin(x))-x;
+	    System.out.println("temp= "+temp);
+	    if(temp<delta){
+	    	System.out.println("Yes");
+	    	return x;
+	    }
+	    else {
+	    	System.out.println("NO");
+	    }
+	    	    return px;
+	    
+			
 	}
 	
 	public static double GetPI(){
