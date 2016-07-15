@@ -3,7 +3,7 @@ public class Math {
 
 	public static double sin(double degree) {
 
-		//Math m=new Math();
+		
 		double PI = GetPI();
 		int PRECISION=10;
 
@@ -13,7 +13,7 @@ public class Math {
 
 		// the first element of the taylor series
 
-		double sum = rad;
+		/*double sum = rad;
 
 		// add them up until a certain precision (eg. 10)
 
@@ -27,6 +27,11 @@ public class Math {
 
 		sum -= pow(rad, 2 * i + 1) / factorial(2 * i + 1);
 
+		}*/
+		
+		
+		for(int i=0,int j=0;i<PRECISION;i+=2,j++){
+			sum+=pow(-1,j)*pow(rad,i+1)/factorial(i+1);
 		}
 
 		return sum;
