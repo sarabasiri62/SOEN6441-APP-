@@ -1,5 +1,7 @@
 package cheers;
+/**
 
+ */
 import java.util.*;
 import javax.xml.transform.*;
 import javax.xml.transform.stream.*;
@@ -8,17 +10,17 @@ import org.w3c.dom.*;
 import javax.xml.parsers.*;
 
 public class Xml_File_Save {
-    public static void save(String radius, String length) throws Exception {
+    public static void saveFile(String radius, String length) throws Exception {
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        Document document = documentBuilder.parse("d:/cheers.xml");
+        Document document = documentBuilder.parse("cheers.xml");
         Element root = document.getDocumentElement();
 
-        Collection<Values> servers = new ArrayList<Values>();
-        servers.add(new Values());
+        Collection<setValues> servers = new ArrayList<setValues>();
+        servers.add(new setValues());
 
-        for (Values server : servers) {
+        for (setValues server : servers) {
             // server elements
             Element newServer = document.createElement("Execution");
 
@@ -37,13 +39,13 @@ public class Xml_File_Save {
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
-        StreamResult result = new StreamResult("d:/cheers.xml");
+        StreamResult result = new StreamResult("cheers.xml");
         transformer.transform(source, result);
         System.out.println("XML Saved!!!");
-    }
+    }		//end of saveFile
 
-    public static class Values {
+    public static class setValues {
         public String getRadius() { return ""; }
         public String getLength() { return ""; }
-    }
-}
+    }		//end of Values
+}		//end of Xml_File_Save

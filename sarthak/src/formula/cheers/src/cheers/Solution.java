@@ -1,5 +1,7 @@
 package cheers;
+/**
 
+ */
 public class Solution {
 	
 	public static double alpha_Guess=2;

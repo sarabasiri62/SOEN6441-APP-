@@ -1,5 +1,7 @@
 package cheers;
+/**
 
+ */
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -108,7 +110,7 @@ public class Cheers_Gui {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				try {
-					Xml_File_Save.save(radius_input,string_length_result);
+					Xml_File_Save.saveFile(radius_input,string_length_result);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -155,14 +157,14 @@ public class Cheers_Gui {
 		label_length_output.setBounds(263, 104, 161, 14);
 		frame.getContentPane().add(label_length_output);
 		
-		JButton button_view_stats = new JButton("View Stats");					//button_view_stats
+		/*JButton button_view_stats = new JButton("View Stats");					//button_view_stats
 		button_view_stats.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(frame, "Time taken to calculate : "+time_elapsed+ " Milliseconds");
 			}
 		});
 		button_view_stats.setBounds(186, 208, 111, 23);
-		frame.getContentPane().add(button_view_stats);
+		frame.getContentPane().add(button_view_stats);*/
 		
 
 	}
