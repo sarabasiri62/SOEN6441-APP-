@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Font; 
 import java.io.*;
 import java.text.NumberFormat;
+import java.awt.SystemColor;
 
 /**
  * @author sara basiri
@@ -24,9 +25,9 @@ public class GUI {
     
 	private JFrame frame;  // the main application frame
 	private JTextField input; // the text field to insert the value of radius. 
-	private JTextField lengthOutput; //the text field that shows the result of length value. 
 	private long timeElapsed;  //the variable that stores the value of time consumption
 	private String result="*********Output*********\n";
+	private JLabel lblResult = new JLabel("New label");
 
 	/**
 	 * Launch the application.
@@ -59,19 +60,23 @@ public class GUI {
 	 */
 	private void initialize() throws IOException {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(Color.black);
+		
+		frame.setForeground(SystemColor.desktop);
+		frame.setBackground(SystemColor.desktop);
 		frame.setResizable(false);
-		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frame.setBounds(100, 100, 535, 393);
+		frame.getContentPane().setBackground(SystemColor.control);
+		frame.setBounds(100, 100, 582, 505);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblRadious = new JLabel("Radius:");
+		JLabel lblRadious = new JLabel("Radius (cm) :");
 		lblRadious.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblRadious.setBounds(10, 102, 61, 14);
+		lblRadious.setBounds(34, 261, 95, 14);
 		frame.getContentPane().add(lblRadious);
 		
 		input = new JTextField();
-		input.setBounds(70, 90, 86, 42);
+		input.setBounds(34, 286, 232, 26);
 		frame.getContentPane().add(input);
 		input.setColumns(10);
 		
@@ -81,7 +86,8 @@ public class GUI {
 		 *After running the program, it computes the time consumption. 
 		 */
 		JButton calculate = new JButton("Calculate");
-		calculate.setBounds(154, 90, 95, 42);
+		calculate.setFont(new Font("Tahoma", Font.BOLD, 12));
+		calculate.setBounds(300, 283, 125, 30);
 		calculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
@@ -108,13 +114,15 @@ public class GUI {
 				long startTime=System.nanoTime(); // time of the system before running the program. 
 			
 				
-				Runtime runtime = Runtime.getRuntime(); 
-								
+												
 				double Radious=Double.parseDouble(input.getText());
 				c.run(Radious);
-				long freeMemoryAfter = runtime.freeMemory();
 				
-				lengthOutput.setText(Double.toString(c.getLength()));
+				lblResult.setBounds(113, 349, 151, 14);
+				frame.getContentPane().add(lblResult);
+				lblResult.setText(Double.toString(c.getLength()));
+								
+				//lengthOutput.setText(Double.toString(c.getLength()));
 				timeElapsed=System.nanoTime()-startTime; /* the difference between the current time of the system and the 
 				                                                   time before running would be the time consumption of the program. */
 				
@@ -123,7 +131,7 @@ public class GUI {
 				
 				
 								
-				result+="Radius= "+input.getText()+"\nLength= "+lengthOutput.getText()+"\n\n\n";
+				result+="Radius= "+input.getText()+"\nLength= "+lblResult.getText()+"\n\n\n";
 				}
 				}
 				catch (NumberFormatException nfe){
@@ -136,16 +144,10 @@ public class GUI {
 		});
 		frame.getContentPane().add(calculate);
 		
-		JLabel lblLength = new JLabel("Length: ");
-		lblLength.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblLength.setBounds(259, 102, 68, 14);
-		frame.getContentPane().add(lblLength);
-		
-		lengthOutput = new JTextField();
-		lengthOutput.setEditable(false);
-		lengthOutput.setBounds(338, 90, 171, 42);
-		frame.getContentPane().add(lengthOutput);
-		lengthOutput.setColumns(10);
+		JLabel lblresult = new JLabel("Length: ");
+		lblresult.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblresult.setBounds(35, 347, 68, 14);
+		frame.getContentPane().add(lblresult);
 		
 		
 		/**
@@ -154,25 +156,26 @@ public class GUI {
 		 * in a text format.
 		 */
 		
-		JButton btnSave = new JButton("Save to Text File");
+		JButton btnSave = new JButton("<html>Save to <br> Text File</html>");
+		btnSave.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 								
 				 try {
-					    if(lengthOutput.getText().equals("")){
+					    if(lblResult.getText().equals("")){
 					    	JOptionPane.showMessageDialog(frame,"No Output Generated, Maybe you have not clicked on 'Calculate' button.","No Calculation Made",JOptionPane.ERROR_MESSAGE);
 					    	
 					    }
 					    else{
 					    	
 			            String str = result;
-			            File newTextFile = new File("Output.txt");
+			            File newTextFile = new File("resources/Output.txt");
 			            FileWriter fw = new FileWriter(newTextFile);
          
 			            fw.write(str);
 			            fw.close();
 			            
-			            JOptionPane.showMessageDialog(frame, "Your File Saved Successfully.","Success Message",JOptionPane.INFORMATION_MESSAGE);
+			            JOptionPane.showMessageDialog(frame, "Text file updated sucessfully.");
 					    }
 
 			        } catch (IOException iox) {
@@ -182,55 +185,74 @@ public class GUI {
 			    
 			}
 		});
-		btnSave.setBounds(338, 186, 171, 42);
+		btnSave.setBounds(34, 405, 125, 59);
 		frame.getContentPane().add(btnSave);
 		
-		JButton btnClose = new JButton("Close");
+		JButton btnClose = new JButton("Exit");
+		btnClose.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 			}
 		});
-		btnClose.setBounds(338, 292, 171, 40);
+		btnClose.setBounds(445, 405, 110, 60);
 		frame.getContentPane().add(btnClose);
 		
-		JButton btnView = new JButton("View Status ");
+		JButton btnView = new JButton("<html>View Time <br> \r\n Consumed\r\n</html>");
+		btnView.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame,"Time= "+timeElapsed+"  Nanoseconds");
+				JOptionPane.showMessageDialog(frame,"Time taken for computation : "+timeElapsed+"  Nanoseconds");
 			}
 		});
-		btnView.setBounds(338, 239, 171, 42);
+		btnView.setBounds(169, 404, 138, 60);
 		frame.getContentPane().add(btnView);
 		
 		JLabel lblCheers = new JLabel("CHEERS");
 		lblCheers.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblCheers.setBounds(10, 19, 86, 34);
+		lblCheers.setBounds(241, 25, 86, 34);
 		frame.getContentPane().add(lblCheers);
 		
 		/**
 		 * by clicking this button, a description of the application would be provided for the user. 
 		 */
 		JButton button_description = new JButton("About");
+		button_description.setFont(new Font("Tahoma", Font.BOLD, 13));
 		button_description.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, "Imagine there are two circular coasters of equal area.The purpose is to find how \n"
-														+ "     far the two costers need to be moved on top of each other such that the area of \n"
-														+ "     the overlapping region is half the area of any of the coasters. The input should \n"
-														+ "     be the redius of the circles and the output would be the length of the overlapping area.\n"
-														+"\n\nimage ref. -\n http://users.encs.concordia.ca/~kamthan/courses/soen-6441/project_description.pdf");
+				JOptionPane.showMessageDialog(frame, "Suppose there are two circular beverage coasters of equal area. "
+						+ "\nThe purpose is to find how far the two coasters need to be moved on top of each other,"
+						+ "\nsuch that the area of the overlapping region is half the area of any of the coasters."
+						+ "\nThe input should be the radius of the circles and the output would be the distance at which "
+						+ "\ncoasters must be placed in order to meet the condition."
+						+"\n\nImage ref. -\nhttp://users.encs.concordia.ca/~kamthan/courses/soen-6441/project_description.pdf");
 			}
 		});
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(70, 181, 179, 151);
+		panel.setBounds(191, 79, 179, 151);
 		frame.getContentPane().add(panel);
-		ImageIcon image = new ImageIcon("background.jpg");
+		ImageIcon image = new ImageIcon("resources/background.jpg");
 		JLabel label1 = new JLabel("", image, JLabel.CENTER);
 		panel.add(label1);
 		
-		button_description.setBounds(94, 27, 155, 23);
+		button_description.setBounds(317, 404, 118, 60);
 		frame.getContentPane().add(button_description);
+		
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				input.setText(null);
+			}
+		});
+		btnClear.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnClear.setBounds(437, 283, 118, 30);
+		frame.getContentPane().add(btnClear);
+		
+		
+		
+		
+		
 		
 		
 		
