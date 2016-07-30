@@ -215,7 +215,7 @@ public class Cheers_Gui {
 		panel_1.setBounds(45, 223, 393, 132);
 		frame.getContentPane().add(panel_1);
 		
-		JLabel label_cheers = new JLabel("<html><u>CHEERS</u></html>");												//label_cheers
+		JLabel label_cheers = new JLabel("CHEERS");							//label_cheers
 		label_cheers.setFont(new Font("Tahoma", Font.BOLD, 18));
 		label_cheers.setBounds(207, 22, 77, 39);
 		frame.getContentPane().add(label_cheers);
@@ -223,7 +223,7 @@ public class Cheers_Gui {
 		JButton button_view_time_consumed = new JButton("<html>View Time <br />Consumed</html>\n");	//button_view_time_consumed
 		button_view_time_consumed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, "Time taken for Computation : "+computationTime+" nanosecond");
+				JOptionPane.showMessageDialog(frame, "Time taken for computation : "+computationTime+" nanosecond");
 			}
 
 		});

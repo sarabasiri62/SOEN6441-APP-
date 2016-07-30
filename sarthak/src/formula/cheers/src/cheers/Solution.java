@@ -34,7 +34,6 @@ public class Solution {
 	public static double calculate_Length(double Radius)
 	{
 		double alpha=calculate_Alpha();	
-		System.out.println(alpha);
 		return 2*Radius*(1-Math.cos(alpha/2));			//implementation of formula : 2*R(1-cos(x/2))			
 	}				//end of calculate_Length
 	
